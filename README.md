@@ -9,6 +9,7 @@ Libraries used:
 
 - [Compose Multiplatform](https://jb.gg/compose) for UI
 - [Voyager](https://github.com/adrielcafe/voyager) - Navigation & Screen Model(a.k.a ViewModel) library
+- [SQLDelight](https://github.com/cashapp/sqldelight) - Typesafe Kotlin APIs from your SQL statements.
 - [Koin](https://github.com/InsertKoinIO/koin) - DI Framework
 - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Asynchronous programming.
 - [UUID](https://github.com/benasher44/uuid) - Multiplatform UUID implementation
@@ -27,6 +28,10 @@ There are few modules:
   you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
 
 * `/data` contains data layer of the application: core models & repositories.
+
+* `/storage` contains storage layer of the application: entities & database.
+
+
 
 ### Run your application on Android
 

@@ -27,7 +27,7 @@ class NoteListScreenModel(
 
     fun addNote() {
         screenModelScope.launch {
-            repository.addNote(text = mutableState.value.input)
+            repository.addNote(mutableState.value.input)
             mutableState.update { it.copy(input = String.EMPTY) }
         }
     }
@@ -46,7 +46,7 @@ class NoteListScreenModel(
 
     fun completeNote(id: Uuid, completed: Boolean) {
         screenModelScope.launch {
-            repository.completeNote(id = id, completed = completed)
+            repository.markDone(id = id, completed = completed)
         }
     }
 

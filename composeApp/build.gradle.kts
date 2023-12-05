@@ -21,8 +21,9 @@ kotlin {
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64()
+        iosSimulatorArm64(),
     ).forEach { iosTarget ->
+
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
@@ -40,11 +41,14 @@ kotlin {
             implementation(libs.compose.ui)
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.koin.android)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
         }
         commonMain.dependencies {
+            implementation(projects.storage)
             implementation(projects.data)
             implementation(compose.runtime)
             implementation(compose.foundation)

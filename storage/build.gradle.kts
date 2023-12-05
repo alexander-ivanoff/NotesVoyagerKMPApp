@@ -1,4 +1,5 @@
 plugins {
+    alias(libs.plugins.sqldelight)
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
 }
@@ -20,7 +21,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "data"
+            baseName = "storage"
             isStatic = true
             linkerOpts.add("-lsqlite3")
         }
@@ -28,26 +29,39 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            //put your multiplatform dependencies here
             implementation(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.uuid)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.datetime)
-            implementation(projects.storage)
+            implementation(libs.sqldelight.coroutines.extensions)
+        }
+        androidMain.dependencies {
+            implementation(libs.sqldelight.android.driver)
+            implementation(libs.koin.android)
+        }
+        iosMain.dependencies {
+            implementation(libs.sqldelight.native.driver)
+        }
+        jvmMain.dependencies {
+            implementation(libs.sqldelight.sqlite.driver)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-        }
-        androidMain.dependencies {
-            implementation(libs.koin.android)
         }
     }
 }
 
 android {
-    namespace = "org.gauss.data"
+    namespace = "org.gauss.storage"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
+    }
+}
+
+sqldelight {
+    databases {
+        create("NotesDb") {
+            packageName.set("org.gauss")
+        }
     }
 }

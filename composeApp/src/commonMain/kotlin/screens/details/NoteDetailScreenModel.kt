@@ -26,7 +26,7 @@ class NoteDetailScreenModel(
 
     fun completeNote(completed: Boolean) {
         screenModelScope.launch {
-            repository.completeNote(id = id, completed = completed)
+            repository.markDone(id = id, completed = completed)
         }
     }
 
